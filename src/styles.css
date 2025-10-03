@@ -52,5 +52,6 @@ form {
 }
 form input,
 form select {
+  height: 2rem;
   width: 20rem;
 }
