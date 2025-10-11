@@ -45,7 +45,7 @@ h6 {
 }
 form {
   border: 0.1rem solid black;
-  padding: 1rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
 }
@@ -53,7 +53,6 @@ form input,
 form select {
   height: 2rem;
   width: 20rem;
-  margin-bottom: 1rem;
 }
 
 form input:user-invalid {
@@ -63,4 +62,8 @@ form input:user-invalid {
 
 span {
   color: red;
+  font-size: 0.875rem;
+  min-height: 1.25rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
