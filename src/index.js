@@ -1,15 +1,27 @@
 import "./styles.css";
 
 const form = document.querySelector("form");
-const formInputs = document.querySelectorAll(".form-input");
-const email = document.querySelector("#email");
-const emailError = document.querySelector("#email + span.error");
+const emailInput = document.querySelector("#email");
+const countrySelect = document.querySelector("#country");
+const zipInput = document.querySelector("#zip-code");
+const passwordInput = document.querySelector("#password");
+const confirmPwdInput = document.querySelector("#password-confirmation");
 
-formInputs.forEach((inputElement) => {
-  inputElement.addEventListener("input", (e) => {});
-});
-// email.addEventListener("input", (e) => {
-//   if (email.validity.valid) {
-//     emailError.textContent = ""
-//   }
-// });
+function validateEmail() {
+  const errorSpan = emailInput.nextElementSibling;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailInput.value.trim()) {
+    errorSpan.textContent = "Please enter an email address";
+    return false;
+  } else if (!emailRegex.test(emailInput.value)) {
+    errorSpan.textContent = "Please enter a valid email address";
+    return false;
+  } else {
+    errorSpan.textContent = "";
+    return true;
+  }
+}
+
+//Input event listeners
+emailInput.addEventListener("input", validateEmail);

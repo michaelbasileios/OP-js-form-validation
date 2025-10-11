@@ -55,3 +55,12 @@ form select {
   width: 20rem;
   margin-bottom: 1rem;
 }
+
+form input:user-invalid {
+  border: 0.1rem solid red;
+  background-color: beige;
+}
+
+span {
+  color: red;
+}
