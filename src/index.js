@@ -23,5 +23,18 @@ function validateEmail() {
   }
 }
 
+function validateCountry() {
+  const errorSpan = countrySelect.nextElementSibling;
+
+  if (!countrySelect.value) {
+    errorSpan.textContent = "Please select a country";
+    return false;
+  } else {
+    errorSpan.textContent = "";
+    return true;
+  }
+}
+
 //Input event listeners
 emailInput.addEventListener("input", validateEmail);
+countrySelect.addEventListener("change", validateCountry);
