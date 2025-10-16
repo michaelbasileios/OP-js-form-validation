@@ -66,8 +66,30 @@ function validatePassword() {
   }
 }
 
+function validatePwdConfirm() {
+  const errorSpan = confirmPwdInput.nextElementSibling;
+
+  if (!confirmPwdInput.value) {
+    errorSpan.textContent = "Please confirm your password";
+    return false;
+  } else if (confirmPwdInput.value !== passwordInput.value) {
+    errorSpan.textContent = "Passwords do not match";
+    return false;
+  } else {
+    errorSpan.textContent = "";
+    return true;
+  }
+}
+
 //Input event listeners
 emailInput.addEventListener("input", validateEmail);
 countrySelect.addEventListener("change", validateCountry);
 zipInput.addEventListener("input", validateZipCode);
 passwordInput.addEventListener("input", validatePassword);
+confirmPwdInput.addEventListener("input", validatePwdConfirm);
+//Validate confirmation if main password changes
+passwordInput.addEventListener("input", () => {
+  if (confirmPwdInput.value) {
+    validatePwdConfirm();
+  }
+});
