@@ -51,7 +51,23 @@ function validateZipCode() {
   }
 }
 
+function validatePassword() {
+  const errorSpan = passwordInput.nextElementSibling;
+
+  if (!passwordInput.value) {
+    errorSpan.textContent = "Password is required";
+    return false;
+  } else if (passwordInput.value.length < 8) {
+    errorSpan.textContent = "Password must be at least 8 characters";
+    return false;
+  } else {
+    errorSpan.textContent = "";
+    return true;
+  }
+}
+
 //Input event listeners
 emailInput.addEventListener("input", validateEmail);
 countrySelect.addEventListener("change", validateCountry);
 zipInput.addEventListener("input", validateZipCode);
+passwordInput.addEventListener("input", validatePassword);
