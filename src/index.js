@@ -35,6 +35,23 @@ function validateCountry() {
   }
 }
 
+function validateZipCode() {
+  const errorSpan = zipInput.nextElementSibling;
+  const zipRegex = /^\d{5}(-\d{4})?$/;
+
+  if (!zipInput.value.trim()) {
+    errorSpan.textContent = "Please enter a zip code";
+    return false;
+  } else if (!zipRegex.test(zipInput.value)) {
+    errorSpan.textContent = "Please enter a valid zip code";
+    return false;
+  } else {
+    errorSpan.textContent = "";
+    return true;
+  }
+}
+
 //Input event listeners
 emailInput.addEventListener("input", validateEmail);
 countrySelect.addEventListener("change", validateCountry);
+zipInput.addEventListener("input", validateZipCode);
