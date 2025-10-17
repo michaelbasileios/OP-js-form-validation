@@ -55,7 +55,8 @@ form select {
   width: 20rem;
 }
 
-form input:user-invalid {
+input[aria-invalid="true"],
+select[aria-invalid="true"] {
   border: 0.1rem solid red;
   background-color: beige;
 }

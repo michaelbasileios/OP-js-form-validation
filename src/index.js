@@ -13,12 +13,15 @@ function validateEmail() {
 
   if (!emailInput.value.trim()) {
     errorSpan.textContent = "Please enter an email address";
+    emailInput.setAttribute("aria-invalid", "true");
     return false;
   } else if (!emailRegex.test(emailInput.value)) {
     errorSpan.textContent = "Please enter a valid email address";
+    emailInput.setAttribute("aria-invalid", "true");
     return false;
   } else {
     errorSpan.textContent = "";
+    emailInput.removeAttribute("aria-invalid");
     return true;
   }
 }
@@ -28,9 +31,11 @@ function validateCountry() {
 
   if (!countrySelect.value) {
     errorSpan.textContent = "Please select a country";
+    countrySelect.setAttribute("aria-invalid", "true");
     return false;
   } else {
     errorSpan.textContent = "";
+    countrySelect.removeAttribute("aria-invalid");
     return true;
   }
 }
@@ -41,12 +46,15 @@ function validateZipCode() {
 
   if (!zipInput.value.trim()) {
     errorSpan.textContent = "Please enter a zip code";
+    zipInput.setAttribute("aria-invalid", "true");
     return false;
   } else if (!zipRegex.test(zipInput.value)) {
     errorSpan.textContent = "Please enter a valid zip code";
+    zipInput.setAttribute("aria-invalid", "true");
     return false;
   } else {
     errorSpan.textContent = "";
+    zipInput.removeAttribute("aria-invalid");
     return true;
   }
 }
@@ -56,12 +64,15 @@ function validatePassword() {
 
   if (!passwordInput.value) {
     errorSpan.textContent = "Password is required";
+    passwordInput.setAttribute("aria-invalid", "true");
     return false;
   } else if (passwordInput.value.length < 8) {
     errorSpan.textContent = "Password must be at least 8 characters";
+    passwordInput.setAttribute("aria-invalid", "true");
     return false;
   } else {
     errorSpan.textContent = "";
+    passwordInput.removeAttribute("aria-invalid");
     return true;
   }
 }
@@ -71,12 +82,15 @@ function validatePwdConfirm() {
 
   if (!confirmPwdInput.value) {
     errorSpan.textContent = "Please confirm your password";
+    confirmPwdInput.setAttribute("aria-invalid", "true");
     return false;
   } else if (confirmPwdInput.value !== passwordInput.value) {
     errorSpan.textContent = "Passwords do not match";
+    confirmPwdInput.setAttribute("aria-invalid", "true");
     return false;
   } else {
     errorSpan.textContent = "";
+    confirmPwdInput.removeAttribute("aria-invalid");
     return true;
   }
 }
@@ -91,5 +105,26 @@ confirmPwdInput.addEventListener("input", validatePwdConfirm);
 passwordInput.addEventListener("input", () => {
   if (confirmPwdInput.value) {
     validatePwdConfirm();
+  }
+});
+
+//Form submission
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const emailValid = validateEmail();
+  const countryValid = validateCountry();
+  const zipValid = validateZipCode();
+  const pwdValid = validatePassword();
+  const confirmPwdValid = validatePwdConfirm();
+
+  if (emailValid && countryValid && zipValid && pwdValid && confirmPwdValid) {
+    alert("Form submitted!");
+  } else {
+    const firstError = form.querySelector("input:invalid, select:invalid");
+    if (firstError) {
+      firstError.focus();
+    }
   }
 });
